@@ -18,7 +18,18 @@ class GiftCard(models.Model):
     
     def __str__(self):
         return '{} - {}'.format(self.code, self.formatted_amount)
+
+class ProductPrice(models.Model):
+    name = models.CharField(max_length=25, help_text='Customer facing name of product')
+    price = models.PositiveIntegerField(help_text='Price of product in cents')
+    date_start = models.DateField()
+    date_end = models.DateField(blank=True, null=True)
     
+    def __str__(self):
+        return '{} - {}'.format(self.name, self.price) 
+
+        
+                
     @property
     def formatted_amount(self):
         return '${0:.2f}'.format(self.amount / 100)
